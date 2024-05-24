@@ -1,0 +1,10 @@
+{
+  "Name": "ABC",
+  "Department": "Quality",
+  "Subjects": [
+    "Maths 1",
+    "Maths 2",
+    "Maths 3",
+    "Maths 4"
+  ]
+}

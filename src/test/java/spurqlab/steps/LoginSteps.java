@@ -1,42 +1,48 @@
 package spurqlab.steps;
 
-import spurqlab.core.TestContext;
+import com.google.common.collect.Table;
+import spurqlab.Pages.LoginPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import spurqlab.Pages.ProductPage;
+import spurqlab.core.TextContext;
 
-import java.util.List;
+public class LoginSteps /*extends TextContext*/ {
+    LoginPage loginPage;
+    ProductPage productPage;
 
-public class LoginSteps extends TestContext {
-
+    public LoginSteps() {
+        this.loginPage = new LoginPage();
+        this.productPage = new ProductPage();
+    }
 
     @Given("User is on SauceLabs login page")
-    public void userIsOnSauceLabsLoginPage()
-    {
-        driver.get("https://www.saucedemo.com/");
-        driver.manage().window().maximize();
-    }
-    @When("User enters {string} and {string}")
-    public void userEntersAnd(String userName, String password) {
-        driver.findElement(By.id("user-name")).sendKeys(userName);
-        driver.findElement(By.id("password")).sendKeys(password);
+    public void userIsOnSauceLabsLoginPage() {
+
     }
 
-    @And("User clicks on {string} button")
-    public void userClicksOnButton(String arg0) {
-        driver.findElement(By.id("login-button")).click();
+    @When("User enters {string} and {string}")
+    public void userEntersAnd(String userName, String password) {
+        loginPage.enterCredentials(userName, password);
+
+    }
+
+    @And("User clicks on login button")
+    public void userClicksOnButton() {
+        loginPage.clickLogin();
     }
 
     @Then("user is on product page with list of {int} products")
-    public void userIsOnProductPageWithListOfProducts(int expectedResult)
-    {
-        List<WebElement> products=driver.findElements(By.className("inventory_item_name"));
-        Assert.assertEquals(products.size(),expectedResult);
-
+    public void userIsOnProductPageWithListOfProducts(int expectedResult) {
+        Assert.assertEquals(productPage.getProductCount(), expectedResult);
     }
+
+   /* @When("User enters credentials given below:")
+    public void userEntersCredentialsGivenBelow(Table dataTable) {
+
+    }*/
 }
+

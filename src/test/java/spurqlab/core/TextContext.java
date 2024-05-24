@@ -2,8 +2,7 @@ package spurqlab.core;
 
 import org.openqa.selenium.WebDriver;
 
-public class TestContext {
+public class TextContext {
 
-  public static WebDriver driver;
-
+    public static WebDriver driver;
 }
